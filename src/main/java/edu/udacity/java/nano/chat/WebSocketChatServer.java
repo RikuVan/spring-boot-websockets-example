@@ -87,6 +87,11 @@ public class WebSocketChatServer {
     public void onClose(Session session) {
         LOGGER.info("Session closed for sessionID: {}, user: {}", session.getId());
         onlineSessions.remove(session.getId());
+        try {
+            session.close();
+        } catch(IOException ex) {
+            LOGGER.error("Failed to close session for sessionID: {}", session.getId());
+        }
     }
 
     /**
