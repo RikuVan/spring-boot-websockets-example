@@ -1,14 +1,11 @@
 package edu.udacity.java.nano;
 
-import edu.udacity.java.nano.chat.GlobalExceptionResolver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,18 +16,12 @@ import java.util.Map;
 
 @SpringBootApplication
 @RestController
-@ComponentScan("edu.udacity.java.nano.chat")
-public class WebSocketChatApplication {
+public class WebSocketChatApplication extends Throwable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketChatApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(WebSocketChatApplication.class, args);
-    }
-
-    @Bean
-    HandlerExceptionResolver customExceptionResolver () {
-        return new GlobalExceptionResolver();
     }
 
     /**
