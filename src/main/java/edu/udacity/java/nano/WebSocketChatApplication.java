@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -19,6 +21,8 @@ import java.util.Map;
 @RestController
 @ComponentScan("edu.udacity.java.nano.chat")
 public class WebSocketChatApplication {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketChatApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(WebSocketChatApplication.class, args);
@@ -40,6 +44,7 @@ public class WebSocketChatApplication {
     @PostMapping("/login")
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<Map> login(@RequestParam("username") String username, HttpServletRequest request) {
+        LOGGER.info("User attempted login: {}", username);
         if (username == null || username.length() == 0) {
             return ResponseEntity.badRequest().build();
         }
@@ -55,6 +60,7 @@ public class WebSocketChatApplication {
 
     @GetMapping("/chat-room")
     public ModelAndView chat(@RequestParam("username") String username) {
+        LOGGER.info("User entered chat room: {}", username);
         return new ModelAndView("/chat", "username", username);
     }
 }

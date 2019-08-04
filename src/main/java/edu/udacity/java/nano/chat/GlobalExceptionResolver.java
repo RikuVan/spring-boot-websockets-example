@@ -13,12 +13,6 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest httpServletRequest,
                                          HttpServletResponse httpServletResponse, @Nullable Object o, Exception e) {
         ModelAndView mv = new ModelAndView();
-        if (e instanceof ArithmeticException) {
-            mv.setViewName("mathError");
-        }
-        if (e instanceof NullPointerException) {
-            mv.setViewName("nullPointerError");
-        }
         mv.addObject("exception", e.toString());
         return mv;
     }
